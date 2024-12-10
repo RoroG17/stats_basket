@@ -11,7 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('match', function (Blueprint $table) {
+            $table->id('Id_Match');
+            $table->integer('numero');
+            $table->boolean('domicile'); 
+            $table->boolean('victoire'); 
+            $table->unsignedBigInteger('Id_Equipe');
+            $table->unsignedBigInteger('Id_Saison');
+
+            // Set foreign keys
+            $table->foreign('Id_Equipe')->references('Id_Equipe')->on('equipes')->onDelete('cascade');
+            $table->foreign('Id_Saison')->references('Id_Saison')->on('saisons')->onDelete('cascade');
+        });
     }
 
     /**
@@ -19,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('match');
     }
 };

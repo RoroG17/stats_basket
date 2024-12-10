@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('joueurs', function (Blueprint $table) {
-            $table->char('licence', 8)->primary();
-            $table->string('nom', 50);
-            $table->string('prenom', 50);
-            $table->string('date_naissance', 50);
+        Schema::create('saisons', function (Blueprint $table) {
+            $table->id('Id_Saison');
+            $table->integer('année_debut');
+            $table->integer('année_fin');
+            $table->string('championnat', 50);
+            $table->string('catégorie', 4);
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('joueurs');
+        Schema::dropIfExists('saisons');
     }
 };
