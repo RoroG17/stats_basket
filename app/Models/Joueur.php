@@ -21,4 +21,8 @@ class Joueur extends Model
         'prenom',
         'date_naissance',
     ];
+
+    public static function getAll() {
+        return Joueur::all();
+    }
 }

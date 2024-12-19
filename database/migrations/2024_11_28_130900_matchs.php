@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('match', function (Blueprint $table) {
+        Schema::create('matchs', function (Blueprint $table) {
             $table->id('Id_Match');
             $table->integer('numero');
             $table->boolean('domicile'); 

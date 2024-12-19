@@ -9,13 +9,11 @@ class Saison extends Model
 {
     use HasFactory;
 
-    protected $table = 'saisons'; // Nom de la table
-    protected $primaryKey = 'Id_Saison'; // Clé primaire
+    protected $table = 'equipes'; // Nom de la table
+    protected $primaryKey = 'Id_Equipe'; // Clé primaire
 
     protected $fillable = [
-        'année_debut',
-        'année_fin',
-        'championnat',
-        'catégorie',
+        'nom',
+        'logo',
     ];
 }

@@ -19,4 +19,11 @@ class Matchs extends Model
         'Id_Equipe',
         'Id_Saison',
     ];
+
+    public static function getAllMatchs() {
+        $matchs = Matchs::join('equipes', 'matchs.Id_Equipe', '=', 'equipes.Id_Equipe')
+                        ->get();
+
+        return $matchs;
+    }
 }
