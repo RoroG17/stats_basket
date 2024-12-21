@@ -37,7 +37,8 @@ class MatchResource extends Controller
      */
     public function show(string $id)
     {
-        //
+        $infoMatch = Matchs::getInfoMatch($id);
+        return $infoMatch;
     }
 
     /**
