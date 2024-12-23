@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('matchs', function (Blueprint $table) {
             $table->id('Id_Match');
+            $table->date('date_match');
             $table->integer('numero');
             $table->boolean('domicile'); 
-            $table->boolean('victoire'); 
+            $table->int('score_f'); 
+            $table->int('score_a'); 
             $table->unsignedBigInteger('Id_Equipe');
             $table->unsignedBigInteger('Id_Saison');
 

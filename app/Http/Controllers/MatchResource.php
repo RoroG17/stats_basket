@@ -13,7 +13,7 @@ class MatchResource extends Controller
     public function index()
     {
         $matchs = Matchs::getAllMatchs();
-        return $matchs;
+        return view('matchs', compact('matchs'));
     }
 
     /**

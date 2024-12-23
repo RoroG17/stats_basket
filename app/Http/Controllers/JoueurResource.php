@@ -12,8 +12,8 @@ class JoueurResource extends Controller
      */
     public function index()
     {
-        $joueurs = Joueur::getAll();
-        return $joueurs;
+        $joueurs = Joueur::getAll(); 
+        return view('joueurs', compact('joueurs'));
     }
 
     /**
