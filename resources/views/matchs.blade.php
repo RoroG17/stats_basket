@@ -5,7 +5,7 @@
 @section('content')
     <h1>Calendrier</h1>
     @foreach ($matchs as $match)
-        <a href="#">
+    <a href="{{ route('matchs.show', ['match' => $match->Id_Match]) }}">
             <div class="carte">
                 <p>Journée {{$match->numero}} ({{ $match->date_match }})<p>
                 @if ($match->domicile == "1")

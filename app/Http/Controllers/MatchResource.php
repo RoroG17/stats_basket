@@ -38,7 +38,8 @@ class MatchResource extends Controller
     public function show(string $id)
     {
         $infoMatch = Matchs::getInfoMatch($id);
-        return $infoMatch;
+        $statsMatch = Matchs::getStatsMatch($id);
+        return view('detail_match', compact('infoMatch', 'statsMatch'));
     }
 
     /**

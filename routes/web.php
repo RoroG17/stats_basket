@@ -5,4 +5,4 @@ use App\Http\Controllers\JoueurResource;
 use App\Http\Controllers\MatchResource;
 
 Route::resource('/joueurs', JoueurResource::class);
-Route::resource('/matchs', MatchResource::class);
+Route::resource('/matchs', MatchResource::class)->names('matchs');

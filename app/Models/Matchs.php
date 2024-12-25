@@ -30,14 +30,19 @@ class Matchs extends Model
     }
 
     public static function getInfoMatch($id) {
-        $match = Matchs::findOrFail($id);
+        $match = Matchs::join('equipes', 'matchs.Id_Equipe', '=', 'equipes.Id_Equipe')
+                        ->where('matchs.Id_Match', $id)
+                        ->firstOrFail();
+
+        
+        return $match;
+    }
+
+    public static function getStatsMatch($id) {
         $stats = Jouer::join('joueurs', 'jouer.licence', '=', 'joueurs.licence')
                         ->where('Id_Match_Basket', '=', $id)
                         ->get();
         
-        return [
-            'match' => $match,
-            'stats' => $stats
-        ];
+        return $stats;
     }
 }
