@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+use App\Models\Jouer;
+
 
 class Joueur extends Model
 {
@@ -24,5 +26,18 @@ class Joueur extends Model
 
     public static function getAll() {
         return Joueur::all();
+    }
+
+    public static function getInfoJoueur($licence) {
+        $joueur = Joueur::findOrFail($licence);
+        return $joueur;
+    }
+
+    public static function getStatsJoueur($licence) {
+        $stats = Jouer::join('matchs', 'jouer.Id_Match_Basket', '=', 'matchs.Id_Match')
+                        ->join('equipes', 'matchs.Id_Equipe', '=', 'equipes.Id_Equipe')
+                        ->where('jouer.licence', '=', $licence)
+                        ->get();
+        return $stats;
     }
 }

@@ -4,5 +4,5 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JoueurResource;
 use App\Http\Controllers\MatchResource;
 
-Route::resource('/joueurs', JoueurResource::class);
+Route::resource('/joueurs', JoueurResource::class)->names('joueurs');
 Route::resource('/matchs', MatchResource::class)->names('matchs');

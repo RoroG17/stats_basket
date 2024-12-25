@@ -38,7 +38,9 @@ class JoueurResource extends Controller
      */
     public function show(string $id)
     {
-        //
+        $infoJoueur = Joueur::getInfoJoueur($id);
+        $statsJoueur = Joueur::getStatsJoueur($id);
+        return view('detail_joueur', compact('infoJoueur', 'statsJoueur'));
     }
 
     /**
