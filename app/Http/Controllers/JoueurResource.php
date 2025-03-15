@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Joueur;
+use Illuminate\Support\Facades\Log;
+
 
 class JoueurResource extends Controller
 {
@@ -13,7 +15,7 @@ class JoueurResource extends Controller
     public function index()
     {
         $joueurs = Joueur::getAll(); 
-        return view('joueurs', compact('joueurs'));
+        return $joueurs;
     }
 
     /**
@@ -40,7 +42,16 @@ class JoueurResource extends Controller
     {
         $infoJoueur = Joueur::getInfoJoueur($id);
         $statsJoueur = Joueur::getStatsJoueur($id);
-        return view('detail_joueur', compact('infoJoueur', 'statsJoueur'));
+        $statsMoyJoueur = Joueur::getStatsMoyJoueur($id);
+        $statsMoyShoot = Joueur::getStatsMoyShootJoueur($id);
+        $statsMoyLF = Joueur::getStatsMoyLFJoueur($id);
+        return [
+            'infoJoueur' => $infoJoueur,
+            'stats' => $statsJoueur,
+            'statsMoy' => $statsMoyJoueur,
+            'statsShoot' => $statsMoyShoot,
+            'statsLF' => $statsMoyLF
+        ];
     }
 
     /**

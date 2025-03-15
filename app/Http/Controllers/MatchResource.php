@@ -13,7 +13,7 @@ class MatchResource extends Controller
     public function index()
     {
         $matchs = Matchs::getAllMatchs();
-        return view('matchs', compact('matchs'));
+        return $matchs;
     }
 
     /**
@@ -35,12 +35,17 @@ class MatchResource extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): array
     {
         $infoMatch = Matchs::getInfoMatch($id);
         $statsMatch = Matchs::getStatsMatch($id);
-        return view('detail_match', compact('infoMatch', 'statsMatch'));
+
+        return [
+            'infoMatch' => $infoMatch,
+            'statsMatch' => $statsMatch
+        ];
     }
+
 
     /**
      * Show the form for editing the specified resource.

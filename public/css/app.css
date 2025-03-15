@@ -1,0 +1,98 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    border: 2px solid black;
+    height: 30em;
+}
+
+nav {
+    background-color: red;
+    float: left;
+    width: 20%;
+    height: 50em;
+    margin-right: 10%;
+}
+
+nav a {
+    text-decoration: none;
+    color:white;
+}
+
+ul {
+    display:flex;
+    padding: 1em;
+    margin-bottom: -1em;
+}
+
+ul:hover {
+    background-color: rgb(139, 25, 25);
+}
+
+.icon { 
+    width: 50px;
+}
+
+ul p {
+    margin-left: 1em;
+    font-size: 17px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+main {
+    float: right;
+    width: 75%;
+}
+
+.carte{
+    border: 1px solid black ;
+    border-radius: 10px;
+    padding: 3em;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.carte-match{
+    background-image: linear-gradient(rgba(255, 0, 0, 0.5), rgba(255, 0, 0, 0.5)), url("/storage/fond.png");
+    background-size: 1000px 700px;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 30em;
+    background-color: rgba(180, 0, 0, 0.5);
+    text-align: center;
+    color: white;
+
+
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  table tr:nth-child(even){background-color: #f2f2f2;}
+  
+  table tr:hover {background-color: #ddd;}
+  
+  table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: red;
+    color: white;
+  }
+img {
+    width: 150px;
+}
+
