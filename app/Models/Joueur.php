@@ -28,6 +28,22 @@ class Joueur extends Model
     public static function getAll() {
         return Joueur::orderBy('nom')->orderBy('prenom')->get();
     }
+
+    public static function getAllStatsMoy() {
+        $stats = Jouer::selectRaw('
+                            AVG(jouer.tir_reussi * 2 + jouer.three_points_reussi * 3 + jouer.lf_reussi) AS Points,
+                            AVG(jouer.passe_decisive) AS Passe_Decisive,
+                            AVG(jouer.rebond_off + jouer.rebond_def) AS Rebonds,
+                            AVG(jouer.rebond_def) AS Rebond_def,
+                            AVG(jouer.rebond_off) AS Rebond_off,
+                            AVG(jouer.interception) AS Interception,
+                            AVG(jouer.contre) AS Contre,
+                            AVG(jouer.ballon_perdu) AS Ballon_Perdu,
+                            AVG(jouer.faute) AS Faute
+                        ')
+                        ->first(); 
+        return $stats;   
+    }
     
 
     public static function getInfoJoueur($licence) {
@@ -80,4 +96,77 @@ class Joueur extends Model
                         ->first(); 
         return $stats;   
     }
+
+
+    public static function getImplicationJoueur($licence) {
+        $stats = Jouer::where('jouer.licence', '=', $licence)
+                    ->select(DB::raw('AVG(passe_decisive + rebond_def + rebond_off + interception + contre +  ballon_perdu + tir_reussi + tir_rate + three_points_reussi +
+                                            three_points_rate + passe_reussi + passe_rate + lf_reussi + lf_rate + faute) as total'))
+                    ->first();
+        return $stats;
+    }
+
+    public static function getAllImplication()
+    {
+        $moyenne = Jouer::select(DB::raw('AVG(total_stats) as total'))
+            ->from(function ($query) {
+                $query->select(
+                        'id_match_basket',
+                        DB::raw('SUM(passe_decisive + rebond_def + rebond_off + interception + contre + ballon_perdu + tir_reussi + tir_rate + three_points_reussi + three_points_rate + passe_reussi + passe_rate + lf_reussi + lf_rate + faute) as total_stats')
+                    )
+                    ->from('jouer')
+                    ->groupBy('id_match_basket');
+            }, 'match_stats')
+            ->first();
+
+        return $moyenne;
+    }
+
+    public static function getImplicationPositiveJoueur($licence) {
+        $stats = Jouer::where('jouer.licence', '=', $licence)
+                    ->select(DB::raw('AVG(passe_decisive + rebond_def + rebond_off + interception + contre + tir_reussi + three_points_reussi + passe_reussi + lf_reussi) as total'))
+                    ->first();
+        return $stats;
+    }
+
+    public static function getAllImplicationPositive()
+    {
+        $moyenne = Jouer::select(DB::raw('AVG(total_stats) as total'))
+            ->from(function ($query) {
+                $query->select(
+                        'id_match_basket',
+                        DB::raw('SUM(passe_decisive + rebond_def + rebond_off + interception + contre + tir_reussi + three_points_reussi + passe_reussi + lf_reussi) as total_stats')
+                    )
+                    ->from('jouer')
+                    ->groupBy('id_match_basket');
+            }, 'match_stats')
+            ->first();
+
+        return $moyenne;
+    }
+
+    public static function getImplicationNegativeJoueur($licence) {
+        $stats = Jouer::where('jouer.licence', '=', $licence)
+                    ->select(DB::raw('AVG(ballon_perdu + tir_rate + three_points_rate + passe_rate + lf_rate + faute) as total'))
+                    ->first();
+        return $stats;
+    }
+
+    public static function getAllImplicationNegative()
+    {
+        $moyenne = Jouer::select(DB::raw('AVG(total_stats) as total'))
+            ->from(function ($query) {
+                $query->select(
+                        'id_match_basket',
+                        DB::raw('SUM(ballon_perdu + tir_rate + three_points_rate + passe_rate + lf_rate + faute) as total_stats')
+                    )
+                    ->from('jouer')
+                    ->groupBy('id_match_basket');
+            }, 'match_stats')
+            ->first();
+
+        return $moyenne;
+    }
+
+
 }

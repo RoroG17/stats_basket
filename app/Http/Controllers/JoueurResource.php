@@ -43,14 +43,28 @@ class JoueurResource extends Controller
         $infoJoueur = Joueur::getInfoJoueur($id);
         $statsJoueur = Joueur::getStatsJoueur($id);
         $statsMoyJoueur = Joueur::getStatsMoyJoueur($id);
+        $statsMoyAll = Joueur::getAllStatsMoy();
         $statsMoyShoot = Joueur::getStatsMoyShootJoueur($id);
         $statsMoyLF = Joueur::getStatsMoyLFJoueur($id);
+        $statsImplicationJoueur = Joueur::getImplicationJoueur($id);
+        $statsAllImplication = Joueur::getAllImplication();
+        $statsImplicationPositiveJoueur = Joueur::getImplicationPositiveJoueur($id);
+        $statsAllImplicationPositive = Joueur::getAllImplicationPositive();
+        $statsImplicationNegativeJoueur = Joueur::getImplicationNegativeJoueur($id);
+        $statsAllImplicationNegative = Joueur::getAllImplicationNegative();
         return [
             'infoJoueur' => $infoJoueur,
             'stats' => $statsJoueur,
             'statsMoy' => $statsMoyJoueur,
+            'statsMoyAll' => $statsMoyAll,
             'statsShoot' => $statsMoyShoot,
-            'statsLF' => $statsMoyLF
+            'statsLF' => $statsMoyLF,
+            'statsImplicationJoueur' => $statsImplicationJoueur,
+            'statsAllImplication' => $statsAllImplication,
+            'statsImplicationPositiveJoueur' => $statsImplicationPositiveJoueur,
+            'statsAllImplicationPositive' => $statsAllImplicationPositive,
+            'statsImplicationNegativeJoueur' => $statsImplicationNegativeJoueur,
+            'statsAllImplicationNegative' => $statsAllImplicationNegative
         ];
     }
 
