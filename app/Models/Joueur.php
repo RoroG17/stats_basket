@@ -53,10 +53,25 @@ class Joueur extends Model
 
     public static function getStatsJoueur($licence) {
         $stats = Jouer::join('matchs', 'jouer.Id_Match_Basket', '=', 'matchs.Id_Match')
-                        ->join('equipes', 'matchs.Id_Equipe', '=', 'equipes.Id_Equipe')
-                        ->select('*', DB::raw('jouer.rebond_off + jouer.rebond_def AS rebond'), DB::raw('jouer.tir_reussi * 2 + jouer.three_points_reussi * 3 + jouer.lf_reussi AS points'))
-                        ->where('jouer.licence', '=', $licence)
-                        ->get();
+                      ->join('equipes', 'matchs.Id_Equipe', '=', 'equipes.Id_Equipe')
+                      ->select(
+                          '*',
+                          DB::raw('jouer.rebond_off + jouer.rebond_def AS rebond'),
+                          DB::raw('jouer.tir_reussi * 2 + jouer.three_points_reussi * 3 + jouer.lf_reussi AS points'),
+                          DB::raw('ROUND((
+                              (jouer.tir_reussi * 2 + jouer.three_points_reussi * 3 + jouer.lf_reussi) * 2 + 
+                              (jouer.passe_decisive * 1.5) + 
+                              ((jouer.rebond_off + jouer.rebond_def) * 1.2) + 
+                              (jouer.interception * 2) + 
+                              (jouer.contre * 2) +
+                              (jouer.passe_reussi * 0.5) -
+                              (jouer.ballon_perdu * 1) - 
+                              ((jouer.tir_rate + jouer.three_points_rate + jouer.lf_rate) * 0.5)
+                          ) / 8.7 + 3, 1) AS note') // Calcul de la note normalisée
+                      )
+                      ->where('jouer.licence', '=', $licence)
+                      ->orderBy('matchs.date_match')
+                      ->get();
         return $stats;
     }
 

@@ -39,10 +39,12 @@ class MatchResource extends Controller
     {
         $infoMatch = Matchs::getInfoMatch($id);
         $statsMatch = Matchs::getStatsMatch($id);
+        $statsEquipe = Matchs::getStatsEquipeMatch($id);
 
         return [
             'infoMatch' => $infoMatch,
-            'statsMatch' => $statsMatch
+            'statsMatch' => $statsMatch,
+            'statsEquipe' => $statsEquipe,
         ];
     }
 
